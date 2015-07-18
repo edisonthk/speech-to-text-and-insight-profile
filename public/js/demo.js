@@ -88,6 +88,7 @@ $(document).ready(function() {
         var error;
         try {
           error = JSON.parse(xhr.responseText);
+          console.log(error);
         } catch(e) {}
         showError(error.error || error);
       }

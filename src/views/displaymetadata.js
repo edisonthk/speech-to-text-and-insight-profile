@@ -1,6 +1,5 @@
 'use strict';
 
-var $ = require('jQuery');
 var scrolled = false;
 
 var showTimestamp = function(timestamps, confidences) {
@@ -154,8 +153,6 @@ exports.showResult = function(msg, baseString, callback) {
       processString(tempString, false);
     }
   }
-
-  updateScroll();
 
   return baseString;
 
