@@ -31,9 +31,9 @@ require('./config/express')(app);
 // if bluemix credentials exists, then override local
 var credentials = extend({
     version: 'v2',
-    url: '<url>',
-    username: '<username>',
-    password: '<password>'
+    url: 'https://gateway.watsonplatform.net/personality-insights/api',
+    username: 'eb4d3bde-a570-4066-899c-13e4222f3152',
+    password: 'BhUYoBG1KCUF'
 }, bluemix.getServiceCreds('personality_insights')); // VCAP_SERVICES
 
 // Create the service wrapper
