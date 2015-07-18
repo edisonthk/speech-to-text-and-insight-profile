@@ -21,6 +21,8 @@ var express = require('express'),
   bluemix = require('./config/bluemix'),
   watson = require('watson-developer-cloud'),
   extend = require('util')._extend,
+  path = require('path'),
+  request = require('request'),
   fs = require('fs'),
   dummy_text = fs.readFileSync('mobydick.txt');
 
@@ -28,21 +30,26 @@ var express = require('express'),
 // Bootstrap application settings
 require('./config/express')(app);
 
-// if bluemix credentials exists, then override local
-var credentials = extend({
+
+var personalityInsightsCredentials = extend({
     version: 'v2',
     url: 'https://gateway.watsonplatform.net/personality-insights/api',
     username: 'eb4d3bde-a570-4066-899c-13e4222f3152',
     password: 'BhUYoBG1KCUF'
 }, bluemix.getServiceCreds('personality_insights')); // VCAP_SERVICES
 
-// Create the service wrapper
-var personalityInsights = new watson.personality_insights(credentials);
+var speechToTextCredentials = extend({
+      version: 'v1',
+      url: 'https://stream.watsonplatform.net/speech-to-text/api',
+      username: 'a650bcbc-f5ab-494c-91f8-2794a399c9c9',
+      password: 'gLqyOpXi8Vmr'
+  }, bluemix.getServiceCreds('speech_to_text'));  // VCAP_SERVICES 
 
-// render index page
-app.get('/', function(req, res) {
-  res.render('index', { content: dummy_text });
-});
+// Create the service wrapper
+var personalityInsights = new watson.personality_insights(personalityInsightsCredentials);
+
+// Setup static public directory
+app.use(express.static(path.join(__dirname , './public')));
 
 app.post('/', function(req, res) {
   personalityInsights.profile(req.body, function(err, profile) {
@@ -54,6 +61,22 @@ app.post('/', function(req, res) {
     }
     else
       return res.json(profile);
+  });
+});
+
+
+// Get token from Watson using your credentials
+app.get('/token/speech-to-text', function(req, res) {
+  request.get({
+    url: 'https://stream.watsonplatform.net/authorization/api/v1/token?url=' +
+      'https://stream.watsonplatform.net/speech-to-text/api',
+    auth: {
+      user: speechToTextCredentials.username,
+      pass: speechToTextCredentials.password,
+      sendImmediately: true
+    }
+  }, function(err, response, body) {
+    res.status(response.statusCode).send(body);
   });
 });
 
