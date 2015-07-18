@@ -161,9 +161,9 @@ exports.showResult = function(msg, baseString, callback) {
 
 };
 
-// $.subscribe('clearscreen', function() {
-//   var $hypotheses = $('.hypotheses ul');
-//   scrolled = false;
-//   $hypotheses.empty();
-//   alternativePrototype.clearString();
-// });
+$.subscribe('clearscreen', function() {
+  var $hypotheses = $('.hypotheses ul');
+  scrolled = false;
+  $hypotheses.empty();
+  alternativePrototype.clearString();
+});

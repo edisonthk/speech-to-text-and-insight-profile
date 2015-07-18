@@ -65,14 +65,14 @@ $(document).ready(function() {
     localStorage.setItem('sessionPermissions', 'true');
 
 
-    // $.subscribe('clearscreen', function() {
-    //   $('#resultsText').text('');
-    //   $('#resultsJSON').text('');
-    //   $('.error-row').hide();
-    //   $('.notification-row').hide();
-    //   $('.hypotheses > ul').empty();
-    //   $('#metadataTableBody').empty();
-    // });
+    $.subscribe('clearscreen', function() {
+      $('#resultsText').text('');
+      $('#resultsJSON').text('');
+      $('.error-row').hide();
+      $('.notification-row').hide();
+      $('.hypotheses > ul').empty();
+      $('#metadataTableBody').empty();
+    });
 
   });
 
