@@ -1,0 +1,13 @@
+applications:
+- services:
+  - STH-PRO-personality_insights
+  - STH-PRO-MonitoringAndAnalytics
+  - Speech To Text-10
+  disk_quota: 1024M
+  host: STH-PRO
+  name: STH-PRO
+  command: node app.js
+  path: .
+  domain: mybluemix.net
+  instances: 1
+  memory: 512M
