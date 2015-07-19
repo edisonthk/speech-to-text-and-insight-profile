@@ -20,7 +20,10 @@ $(document).ready(function() {
 
   var widgetId = 'vizcontainer', // Must match the ID in index.jade
     widgetWidth = 700, widgetHeight = 700, // Default width and height
-    personImageUrl = 'images/app.png'; // Can be blank
+    personImageUrl = 'images/app.png', // Can be blank
+    content = ""
+
+    ;
 
   // Jquery variables
   var $content = $('.content'),
@@ -93,6 +96,17 @@ $(document).ready(function() {
         showError(error.error || error);
       }
     });
+  });
+
+  $.ajax({
+    method: 'GET',
+    url: '/json/steevejobs.json',
+    success:function(response) {
+        console.log(response);
+    },
+    error: function(xhr) {
+        console.error(xhr);
+    }
   });
 
   /**

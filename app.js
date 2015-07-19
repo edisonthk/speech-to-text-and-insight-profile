@@ -64,7 +64,6 @@ app.post('/', function(req, res) {
   });
 });
 
-
 // Get token from Watson using your credentials
 app.get('/token/speech-to-text', function(req, res) {
   request.get({
