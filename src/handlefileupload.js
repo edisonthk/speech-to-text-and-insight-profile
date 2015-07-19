@@ -44,6 +44,7 @@ exports.handleFileUpload = function(token, model, file, contentType, callback, o
     }
 
     function onListening(socket) {
+        $.publish('startrecording');
       console.log('Socket listening');
       callback(socket);
     }

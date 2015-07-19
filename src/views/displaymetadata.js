@@ -59,6 +59,7 @@ var Alternatives = function(){
       var $alternative;
       if (alternative.transcript) {
         console.log('ALTERNATIVES INDEX', idx);
+
         var transcript = alternative.transcript.replace(/%HESITATION\s/g, '');
         transcript = transcript.replace(/(.)\1{2,}/g, '');
         switch (idx) {
@@ -112,13 +113,6 @@ exports.showJSON = function(msg, baseJSON) {
   return baseJSON;
 }
 
-function updateScroll(){
-    if(!scrolled){
-        var element = $('.table-scroll').get(0);
-        element.scrollTop = element.scrollHeight;
-    }
-}
-
 var initScroll = function() {
   $('.table-scroll').on('scroll', function(){
       scrolled=true;
@@ -157,6 +151,17 @@ exports.showResult = function(msg, baseString, callback) {
   return baseString;
 
 };
+
+$.subscribe('startrecording', function() {
+    var progressName = $('.intro-text');
+    var startRecord = progressName.find(".start-record");
+    var recording = progressName.find(".recording");
+    var preparing = progressName.find(".preparing");
+
+    startRecord.hide();
+    preparing.hide();
+    recording.show();
+});
 
 $.subscribe('clearscreen', function() {
   var $hypotheses = $('.hypotheses ul');

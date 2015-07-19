@@ -26,7 +26,7 @@ $(document).ready(function() {
     ;
 
   // Jquery variables
-  var $content = $('.content'),
+  var $content = $('#resultsText'),
     $loading = $('.loading'),
     $error = $('.error'),
     $errorMsg = $('.errorMsg'),
@@ -41,6 +41,9 @@ $(document).ready(function() {
     $content.val('');
     updateWordsCount();
   });
+
+  var text = 'So what comes to your mind when you hear this acronym, "STH"?\nWell, it does stand for the obnoxious "something" of an average highschooler. Other than that? Our team name.\n\nToday, I\'ll tell you where this name came from, what it stands for, and why we\'ve become the \'STH\'. \n\nI could just spell out the whole abbreviation, but that would be - boring.\nLet me start talking about our long history (accounting back to an ever-so-long 2days) , and you - yes all of you in the audience can just blurt out your guesses of what STH stands for.\n\nOur members.\nWe\'re a team of 5. Our awesome coders LikWee and Tanaka-san, our coding-startups Hiro and, sick absent, Tanaka-kun. And myself.\nSo that\'s two Tanaka\'s - and since Hiro\'s mother\'s maiden name was also Tanaka - make that 2.5 Tanakas out of 5. That\'s half the team.\n\nOur tools.\nWe\'re all here today for a mashup of what again??\nYep, thats bluemix and Watson.\nAnd who\'s Watson\'s world famous partner?\nSherlock Holmes!\n\nBy now you\'ve probably already guessed - yes, we fused our team majority "Tanaka"s with what we might become with the help of an ingenious partner like Watson.\nSherlock Tanaka Holmes. STH.\nWe hope that our PRO-Presenation system might make you as eloquent as history\'s most glorious detective.';
+  $("#resultsText").text(text);
 
   /**
    * Update words count on change
@@ -157,6 +160,7 @@ $(document).ready(function() {
    */
   function showTraits(data) {
     console.log('showTraits()');
+    updateScroll();
     $traits.show();
 
     var traitList = flatten(data.tree),
@@ -215,6 +219,13 @@ $(document).ready(function() {
       $('<p></p>').text(sentences.join(' ')).appendTo(div);
     });
   }
+
+  function updateScroll(){    
+    var element = $('#portfolio').get(0);
+    element.scrollTop = element.scrollHeight;
+    console.log("fdsfsd");
+}
+
 
 /**
  * Renders the sunburst visualization. The parameter is the tree as returned

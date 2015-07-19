@@ -10,7 +10,7 @@ var effects = require('./effects');
 
 
 var LOOKUP_TABLE = {
-  a: ['SteveJobsSpeech.flac', 'Us_English_Broadband_Sample_2.wav'],
+  a: ['STH.flac', 'Us_English_Broadband_Sample_2.wav'],
 };
 
 var playSample = (function() {
@@ -110,23 +110,22 @@ exports.initPlaySample = function(ctx) {
   (function() {
     var fileName = 'audio/' + LOOKUP_TABLE.a[0];
     var el = $('.play-sample-1');
+    var progressName = $('.intro-text');
     el.off('click');
     var iconName = 'play';
     var imageTag = el.find('img');
-    el.click( function(evt) {
-      playSample(ctx.token, imageTag, iconName, fileName, function(result) {
-        console.log('Play sample result', result);
-      });
-    });
-  })(ctx, LOOKUP_TABLE);
+    var startRecord = progressName.find(".start-record");
+    var recording = progressName.find(".recording");
+    var preparing = progressName.find(".preparing");
 
-  (function() {
-    var fileName = 'audio/' + LOOKUP_TABLE.a[1];
-    var el = $('.play-sample-2');
-    el.off('click');
-    var iconName = 'play';
-    var imageTag = el.find('img');
+    preparing.hide();
+    startRecord.show();
+    recording.hide();
+
     el.click( function(evt) {
+        startRecord.hide();
+        preparing.show();
+        recording.hide();
       playSample(ctx.token, imageTag, iconName, fileName, function(result) {
         console.log('Play sample result', result);
       });

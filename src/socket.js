@@ -59,6 +59,15 @@ var initSocket = exports.initSocket = function(options, onopen, onlistening, onm
     $.subscribe('socketstop', function(data) {
       console.log('MICROPHONE: close.');
       socket.close();
+
+        var progressName = $('.intro-text');
+        var startRecord = progressName.find(".start-record");
+        var recording = progressName.find(".recording");
+        var preparing = progressName.find(".preparing");
+
+        startRecord.show();
+        preparing.hide();
+        recording.hide();
     });
     socket.send(JSON.stringify(message));
     onopen(socket);
