@@ -85,7 +85,7 @@ $(document).ready(function() {
           $results.show();
           showTraits(response);
           showTextSummary(response);
-          showVizualization(response);
+          showBarGraph();
         }
 
       },
@@ -113,24 +113,25 @@ $(document).ready(function() {
   });
 
   function showBarGraph() {
-    var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-
-      var barChartData = {
+    
+    var barChartData = {
         labels : ["Openness","Conscientiousness","Extraversion","Agreeableness","Emotional range"],
         datasets : [
-          // {
-          //   fillColor : "rgba(220,220,220,0.5)",
-          //   strokeColor : "rgba(220,220,220,0.8)",
-          //   highlightFill: "rgba(220,220,220,0.75)",
-          //   highlightStroke: "rgba(220,220,220,1)",
-            
-          // },
           {
-            fillColor : "rgba(151,187,205,0.5)",
-            strokeColor : "rgba(151,187,205,0.8)",
-            highlightFill : "rgba(151,187,205,0.75)",
-            highlightStroke : "rgba(151,187,205,1)",
+            label: "Steve Jobs",
+            fillColor : "#FF7A00",
+            
+            highlightFill : "#FFAB5D",
+            
             data : [48.4, 53.35, 28.4, 84.4, 66.5 ]
+          },
+          {
+            label: "Me",
+            fillColor : "#02B1C9",
+            
+            highlightFill : "#5ADCEF",
+            
+            data : [56.4, 19.36, 81.41, 83.2, 40.5 ]
           }
         ]
 
@@ -140,9 +141,10 @@ $(document).ready(function() {
     window.myBar = new Chart(ctx).Bar(barChartData, {
       responsive : true
     });
-  
-  }
 
+    window.myBar.update();
+
+  }
   /**
    * Display an error or a default message
    * @param  {String} error The error
@@ -161,6 +163,7 @@ $(document).ready(function() {
   function showTraits(data) {
     console.log('showTraits()');
     updateScroll();
+
     $traits.show();
 
     var traitList = flatten(data.tree),
@@ -223,8 +226,7 @@ $(document).ready(function() {
   function updateScroll(){    
     var element = $('#portfolio').get(0);
     element.scrollTop = element.scrollHeight;
-    console.log("fdsfsd");
-}
+    }
 
 
 /**
@@ -350,5 +352,4 @@ function showVizualization(theProfile) {
   }
   $content.keyup(updateWordsCount);
   updateWordsCount();
-  showBarGraph();
 });
