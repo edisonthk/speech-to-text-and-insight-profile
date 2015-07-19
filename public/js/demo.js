@@ -109,6 +109,37 @@ $(document).ready(function() {
     }
   });
 
+  function showBarGraph() {
+    var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+
+      var barChartData = {
+        labels : ["Openness","Conscientiousness","Extraversion","Agreeableness","Emotional range"],
+        datasets : [
+          // {
+          //   fillColor : "rgba(220,220,220,0.5)",
+          //   strokeColor : "rgba(220,220,220,0.8)",
+          //   highlightFill: "rgba(220,220,220,0.75)",
+          //   highlightStroke: "rgba(220,220,220,1)",
+            
+          // },
+          {
+            fillColor : "rgba(151,187,205,0.5)",
+            strokeColor : "rgba(151,187,205,0.8)",
+            highlightFill : "rgba(151,187,205,0.75)",
+            highlightStroke : "rgba(151,187,205,1)",
+            data : [48.4, 53.35, 28.4, 84.4, 66.5 ]
+          }
+        ]
+
+      }
+
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myBar = new Chart(ctx).Bar(barChartData, {
+      responsive : true
+    });
+  
+  }
+
   /**
    * Display an error or a default message
    * @param  {String} error The error
@@ -308,4 +339,5 @@ function showVizualization(theProfile) {
   }
   $content.keyup(updateWordsCount);
   updateWordsCount();
+  showBarGraph();
 });
