@@ -9,6 +9,7 @@
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/watson-bootstrap-dark.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/Chart.js"></script>
   </head>
   <body>
     <div class="container">
@@ -91,6 +92,39 @@
         <h3>Visualization of Personality Data</h3>
         <div id="vizcontainer" class="well"></div>
       </div>
+      <div>
+  <h3>Comparation You with Jobs</h3>
+<script>
+  var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+
+  var barChartData = {
+    labels : ["Openness","Conscientiousness","Extraversion","Agreeableness","Emotional range","Needsで最も差のある値","Valuesで最も差のある値"],
+    datasets : [
+      {
+        fillColor : "rgba(220,220,220,0.5)",
+        strokeColor : "rgba(220,220,220,0.8)",
+        highlightFill: "rgba(220,220,220,0.75)",
+        highlightStroke: "rgba(220,220,220,1)",
+        data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+      },
+      {
+        fillColor : "rgba(151,187,205,0.5)",
+        strokeColor : "rgba(151,187,205,0.8)",
+        highlightFill : "rgba(151,187,205,0.75)",
+        highlightStroke : "rgba(151,187,205,1)",
+        data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+      }
+    ]
+
+  }
+  window.onload = function(){
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myBar = new Chart(ctx).Bar(barChartData, {
+      responsive : true
+    });
+  }
+  </script>
+    </div>
     </div>
   </div>
   <div class="hidden">
